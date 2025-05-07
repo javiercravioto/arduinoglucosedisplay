@@ -86,3 +86,5 @@ if ($latest === null) {
 }
 
 echo json_encode(['glucose' => $latest]);
+
+?>
