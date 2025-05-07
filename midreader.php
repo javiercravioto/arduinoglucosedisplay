@@ -78,8 +78,11 @@ if ($glucoseCode !== 200 || empty($glucoseJson['data']['graphData'])) {
     exit;
 }
 
-// Get the latest reading
-$latest = $glucoseJson['data']['graphData'][0]['Value'] ?? null;
+// Get the latest reading (most recent = last item in array)
+$graphData = $glucoseJson['data']['graphData'];
+//echo json_encode($graphData); // uncomment this is for testing and seeing the full array
+$latestEntry = end($graphData);
+$latest = $latestEntry['Value'] ?? null;
 if ($latest === null) {
     echo json_encode(['error' => 'No glucose value found']);
     exit;
